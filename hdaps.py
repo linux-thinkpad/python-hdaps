@@ -2,6 +2,9 @@
 Python bindings for the HDAPS interface
 '''
 
+# Copyright: 2008-2009 Evgeni Golov <sargentd@die-welt.net>
+# License: GPL-2
+
 import struct
 import os.path
 

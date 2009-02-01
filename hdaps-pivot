@@ -4,6 +4,9 @@
 hdaps-pivot - read hdaps position and print it
 '''
 
+# Copyright: 2008-2009 Evgeni Golov <sargentd@die-welt.net>
+# License: GPL-2
+
 from hdaps import *
 from time import sleep
 import getopt
