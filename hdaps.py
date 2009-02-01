@@ -60,3 +60,18 @@ def readInputPosition(callback):
 			callback(x, y)
 		event = input.read(16)
 	input.close()
+
+def isParked(disk):
+	newInterface = '/sys/block/%s/device/unload_heads' % disk
+	oldInterface = '/sys/block/%s/queue/protect' % disk
+	if os.path.exists(newInterface):
+		ret = int(__readSysfs(newInterface))
+	elif os.path.exists(oldInterface):
+		ret = int(__readSysfs(oldInterface))
+	else:
+		raise IOError, "Your kernel does not have an interface to check the state of the disk"
+
+	if ret > 0:
+		return True
+	else:
+		return False
