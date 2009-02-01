@@ -65,11 +65,14 @@ def isParked(disk):
 	newInterface = '/sys/block/%s/device/unload_heads' % disk
 	oldInterface = '/sys/block/%s/queue/protect' % disk
 	if os.path.exists(newInterface):
-		ret = int(__readSysfs(newInterface))
+		try:
+			ret = int(__readSysfs(newInterface))
+		except:
+			raise IOError, "Your disk '%s' seems not to support IDLE_IMMEDIATE." % disk
 	elif os.path.exists(oldInterface):
 		ret = int(__readSysfs(oldInterface))
 	else:
-		raise IOError, "Your kernel does not have an interface to check the state of the disk"
+		raise IOError, "Your kernel does not have an interface to check the state of the disk."
 
 	if ret > 0:
 		return True
